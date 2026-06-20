@@ -792,16 +792,16 @@ internal class ShowItemEffectRanges : IDisposable
     {
       string itemName = currentItem.Name;
 
-      // Match the game's ghost-preview tile (Object.drawPlacementBounds): raw cursor for mouse,
+      // Match the game's ghost-preview tile (Object.drawPlacementBounds): cursor tile for mouse,
       // valid-placement snap for gamepad (else the grid drifts off the actual placement tile).
-      Vector2 grabTile = Game1.GetPlacementGrabTile();
       Vector2 cursorTile;
       if (Game1.IsPerformingMousePlacement())
       {
-        cursorTile = Utility.snapToInt(grabTile);
+        cursorTile = Utility.snapToInt(Game1.currentCursorTile);
       }
       else
       {
+        Vector2 grabTile = Game1.GetPlacementGrabTile();
         Game1.isCheckingNonMousePlacement = true;
         cursorTile = Utility.snapToInt(
           Utility.GetNearbyValidPlacementPosition(
